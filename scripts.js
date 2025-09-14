@@ -7,6 +7,7 @@ const amount = document.querySelector('#amount')
 const currency = document.querySelector('#currency')
 const footer = document.querySelector('main footer')
 const description = document.getElementById('description')
+const result = document.getElementById('result')
 
 // Manipulando input para receber somente NÚMEROS
 amount.addEventListener('input', () => {
@@ -32,6 +33,13 @@ form.onsubmit = (event) => {
 function convertCurrency(amount, price, symbol) {
     try {
         description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`
+        let total = amount * price
+        if(isNaN(total)) {
+            alert("Por favor digite corretamente!")
+        }
+        total = formatCurrencyBRL(total).replace("R$", "")
+
+        result.textContent = `${total} Reais`
         footer.classList.add('show-result')
     } catch (error) {
         console.log(error)
